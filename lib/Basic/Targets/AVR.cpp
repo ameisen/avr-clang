@@ -15,6 +15,8 @@
 #include "clang/Basic/MacroBuilder.h"
 #include "llvm/ADT/StringSwitch.h"
 
+#include <array>
+
 using namespace clang;
 using namespace clang::targets;
 
@@ -28,7 +30,7 @@ struct LLVM_LIBRARY_VISIBILITY MCUInfo {
 };
 
 // This list should be kept up-to-date with AVRDevices.td in LLVM.
-static ArrayRef<MCUInfo> AVRMcus = {
+static constexpr const std::array<MCUInfo, 239> AVRMcus = { {
     {"at90s1200", "__AVR_AT90S1200__"},
     {"attiny11", "__AVR_ATtiny11__"},
     {"attiny12", "__AVR_ATtiny12__"},
@@ -268,7 +270,7 @@ static ArrayRef<MCUInfo> AVRMcus = {
     {"attiny40", "__AVR_ATtiny40__"},
     {"attiny102", "__AVR_ATtiny102__"},
     {"attiny104", "__AVR_ATtiny104__"},
-};
+}};
 
 } // namespace targets
 } // namespace clang
