@@ -23,13 +23,17 @@ namespace clang {
 namespace targets {
 
 // AVR Target
-class LLVM_LIBRARY_VISIBILITY AVRTargetInfo : public TargetInfo {
+class LLVM_LIBRARY_VISIBILITY AVRTargetInfo final : public TargetInfo {
 public:
   AVRTargetInfo(const llvm::Triple &Triple, const TargetOptions &)
       : TargetInfo(Triple) {
     TLSSupported = false;
     PointerWidth = 16;
     PointerAlign = 8;
+    CharWidth = 8;
+    CharAlign = 8;
+    ShortWidth = 16;
+    ShortAlign = 16;
     IntWidth = 16;
     IntAlign = 8;
     LongWidth = 32;
@@ -55,6 +59,12 @@ public:
     WIntType = SignedInt;
     Char32Type = UnsignedLong;
     SigAtomicType = SignedChar;
+    MaxVectorAlign = 8;
+    MaxTLSAlign = 8;
+    SimdDefaultAlign = 8;
+    NewAlign = 8;
+    BigEndian = false; // techically.
+
     resetDataLayout("e-p:16:8-i8:8-i16:8-i32:8-i64:8-f32:8-f64:8-n8-a:8");
   }
 
@@ -172,6 +182,10 @@ public:
     if (isValid)
       CPU = Name;
     return isValid;
+  }
+
+  unsigned getRegisterWidth() const override {
+    return PointerWidth;
   }
 
 protected:

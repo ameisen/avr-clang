@@ -64,6 +64,8 @@ protected:
   bool HasFloat128;
   unsigned char PointerWidth, PointerAlign;
   unsigned char BoolWidth, BoolAlign;
+  unsigned char CharWidth, CharAlign;
+  unsigned char ShortWidth, ShortAlign;
   unsigned char IntWidth, IntAlign;
   unsigned char HalfWidth, HalfAlign;
   unsigned char FloatWidth, FloatAlign;
@@ -330,16 +332,15 @@ public:
   /// \brief Return the alignment of '_Bool' and C++ 'bool' for this target.
   unsigned getBoolAlign() const { return BoolAlign; }
 
-  unsigned getCharWidth() const { return 8; } // FIXME
-  unsigned getCharAlign() const { return 8; } // FIXME
+  /// getCharWidth/Align - Return the size of 'signed char' and 'unsigned char' for
+  /// this target, in bits.
+  unsigned getCharWidth() const { return CharWidth; }
+  unsigned getCharAlign() const { return CharAlign; }
 
-  /// \brief Return the size of 'signed short' and 'unsigned short' for this
-  /// target, in bits.
-  unsigned getShortWidth() const { return 16; } // FIXME
-
-  /// \brief Return the alignment of 'signed short' and 'unsigned short' for
-  /// this target.
-  unsigned getShortAlign() const { return 16; } // FIXME
+  /// getShortWidth/Align - Return the size of 'signed short' and 'unsigned short' for
+  /// this target, in bits.
+  unsigned getShortWidth() const { return ShortWidth; }
+  unsigned getShortAlign() const { return ShortAlign; }
 
   /// getIntWidth/Align - Return the size of 'signed int' and 'unsigned int' for
   /// this target, in bits.
